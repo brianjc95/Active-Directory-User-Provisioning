@@ -1,54 +1,125 @@
 
-# Active Directory User Provisioning Automation
+# Active Directory User Provisioning Automation — V4
 
 ## Project Overview
 
-A PowerShell automation project for bulk Active Directory user provisioning in a Windows Server lab environment.
-
-The project evolved through four versions, progressing from basic CSV-based account creation to input validation, automated security group assignment, error handling, and provisioning reports.
+A PowerShell-based automation tool designed to bulk-create Active Directory user accounts from CSV input. The script validates user records, detects duplicate usernames, provisions accounts, assigns department-based security groups, and generates provisioning reports.
 
 ## Features
 
-- Bulk creation of Active Directory accounts from CSV files.
-- Automated account placement in a designated Organizational Unit.
-- Validation of required user information and username formats.
-- Detection of duplicate usernames and existing accounts.
+- Bulk user creation from CSV files.
+- Validation of required CSV columns and user attributes.
+- Username format validation.
+- Duplicate username detection within CSV files.
+- Detection and skipping of existing Active Directory accounts.
+- Automated account placement in a designated Organizational Unit (OU).
 - Department-based security group assignment.
-- Handling of unmapped departments.
+- Handling of departments without configured group mappings.
 - Error handling for account creation and group assignment.
 - Timestamped CSV and TXT provisioning reports.
-
-## Development History
-
-| Version | Improvements |
-|---|---|
-| V1 | Initial bulk account provisioning |
-| V2 | Input validation and duplicate detection |
-| V3 | Department-based security group assignment |
-| V4 | Reporting, error handling, and provisioning summaries |
+- Summary statistics for account creation, skipped records, invalid records, and failures.
 
 ## Lab Environment
 
-- Windows Server 2022
-- Active Directory Domain Services
-- Domain: `companyx.local`
-- Windows PowerShell 5.1
-- Oracle VirtualBox
+| Component | Configuration |
+|---|---|
+| Operating System | Windows Server 2022 |
+| Active Directory Domain | companyx.local |
+| Domain Controller | DC01 |
+| Destination OU | OU=LabUsers,OU=CompanyX |
+| PowerShell | Windows PowerShell 5.1 |
+| Virtualization | Oracle VirtualBox |
+
+## Department-to-Group Mapping
+
+| Department | Security Group |
+|---|---|
+| IT | IT-Support |
+| HR | HR-Users |
+| Finance | Finance |
+
+Departments without a configured mapping are reported without preventing successful account creation.
+
+## Development History
+
+### V1 — Initial Provisioning
+- Created multiple Active Directory accounts from CSV input.
+- Populated account attributes and enabled new accounts.
+- Skipped accounts that already existed.
+
+### V2 — Validation and Duplicate Detection
+- Added CSV file and required-column validation.
+- Added required-field checks.
+- Implemented username format validation.
+- Detected duplicate usernames within CSV input.
+- Separated valid and invalid records.
+
+### V3 — Security Group Assignment
+- Added department-to-security-group mapping.
+- Automatically assigned new users to appropriate security groups.
+- Added handling for departments without group mappings.
+- Verified group membership independently.
+
+### V4 — Reporting and Error Handling
+- Added timestamped CSV and TXT reports.
+- Recorded account creation, skipped records, and invalid records.
+- Added separate group assignment status tracking.
+- Added error handling for account lookup, account creation, and group assignment.
+- Added provisioning and group assignment summary statistics.
+
+## Testing and Validation
+
+Testing was performed in a virtualized Active Directory lab.
+
+| Test | Result |
+|---|---|
+| Existing account detection | Passed |
+| New account creation | Passed |
+| OU placement verification | Passed |
+| Security group assignment | Passed |
+| Unmapped department handling | Passed |
+| Invalid username rejection | Passed |
+| Duplicate username detection | Passed |
+| CSV report generation | Passed |
+| TXT report generation | Passed |
+| Report content verification | Passed |
+
+### Example Provisioning Results
+
+- Created: 1
+- Skipped: 3
+- Invalid: 0
+- Failed: 0
+- Security groups assigned: 1
+
+Example test account:
+- Username: cwhite
+- Department: IT
+- Security Group: IT-Support
+- Account Status: Enabled
+
+## Reporting
+
+Each execution generates timestamped reports under:
+
+`C:\ADLab\V4\Reports`
+
+CSV reports provide structured provisioning results, while TXT reports provide a human-readable summary and individual account details.
 
 ## Security Considerations
 
-- Passwords are supplied separately using a SecureString variable.
-- Passwords are not stored in the CSV input file or PowerShell scripts.
-- Existing accounts are skipped rather than overwritten.
-- Security group assignments follow predefined department mappings.
+- Passwords are supplied through a SecureString variable rather than stored in the CSV or script.
+- Existing accounts are skipped instead of overwritten.
+- Security group assignment uses department-based mappings.
 - Privileged administrative groups are not automatically assigned.
+- Invalid records are rejected before provisioning.
 
-## Repository Structure
+## Limitations and Future Improvements
 
-Each version is preserved separately to demonstrate the project's development and improvements.
-
-The V4 folder contains additional documentation and sample provisioning reports.
+- Department-to-group mappings are currently maintained within the PowerShell script.
+- Password handling currently relies on a SecureString variable supplied during the PowerShell session.
+- Additional enhancements could include configurable OU mappings, email notifications, and centralized logging.
 
 ## Project Status
 
-**Complete — Four development iterations tested in a virtualized Active Directory environment.**
+**Complete — V4 tested in a virtualized Active Directory environment.**
