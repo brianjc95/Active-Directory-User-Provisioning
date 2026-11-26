@@ -1,0 +1,5 @@
+﻿"Timestamp","Username","FullName","Department","Status","Group","GroupStatus","Details"
+"11/25/2026 8:02:37 PM","jsmith","John Smith","IT","SKIPPED","","NOT ATTEMPTED","Account already exists in Active Directory"
+"11/25/2026 8:02:37 PM","sjohnson","Sarah Johnson","HR","SKIPPED","","NOT ATTEMPTED","Account already exists in Active Directory"
+"11/25/2026 8:02:37 PM","mbrown","Michael Brown","Finance","SKIPPED","","NOT ATTEMPTED","Account already exists in Active Directory"
+"11/25/2026 8:02:58 PM","cwhite","Chris White","IT","CREATED","IT-Support","ASSIGNED","Account created and added to IT-Support"

@@ -1,0 +1,38 @@
+﻿==========================================
+Active Directory User Provisioning Report
+==========================================
+Run Date: 11/25/2026 20:03:07
+Domain: companyx.local
+Target OU: OU=LabUsers,OU=CompanyX,DC=CompanyX,DC=local
+
+PROVISIONING SUMMARY
+--------------------
+Created: 1
+Skipped: 3
+Invalid: 0
+Failed: 0
+
+GROUP ASSIGNMENT SUMMARY
+------------------------
+Assigned: 1
+Failed: 0
+No Mapping: 0
+
+ACCOUNT DETAILS
+---------------
+[SKIPPED] jsmith | John Smith | IT
+Group:  | Group Status: NOT ATTEMPTED
+Details: Account already exists in Active Directory
+
+[SKIPPED] sjohnson | Sarah Johnson | HR
+Group:  | Group Status: NOT ATTEMPTED
+Details: Account already exists in Active Directory
+
+[SKIPPED] mbrown | Michael Brown | Finance
+Group:  | Group Status: NOT ATTEMPTED
+Details: Account already exists in Active Directory
+
+[CREATED] cwhite | Chris White | IT
+Group: IT-Support | Group Status: ASSIGNED
+Details: Account created and added to IT-Support
+
